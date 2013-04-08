@@ -7,7 +7,7 @@ This was a project realized during our second year of Bachelor at ECE Paris, Gra
 
 You can have a look at the result here: http://www.youtube.com/watch?v=TbqKeYX_fzQ .
 
-This was entirely made in VHDL on a Basys Spartan-3E FPGA board using the software Xilinx.*
+This was entirely made in VHDL on a Basys Spartan-3E FPGA board using the software Xilinx.
 
 The team was composed of:
 * Maxime Biette - Project Manager and Lead developer - biette@ece.fr

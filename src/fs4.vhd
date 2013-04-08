@@ -50,12 +50,14 @@ entity fs4 is
            btn_g : in  STD_LOGIC;
            btn_d : in  STD_LOGIC;
            origine_x : out  STD_LOGIC_VECTOR (9 downto 0);
-           orignie_y : out  STD_LOGIC_VECTOR (9 downto 0));
+           orignie_y : out  STD_LOGIC_VECTOR (9 downto 0);
+			  direction : out std_logic_vector (3 downto 0));
 end fs4;
 
 architecture Behavioral of fs4 is
-signal ligne: STD_LOGIC_VECTOR (9 downto 0):="0010100000";
-signal pixel: STD_LOGIC_VECTOR (9 downto 0):="0010100000";
+signal ligne: STD_LOGIC_VECTOR (9 downto 0):="0110011010";
+signal pixel: STD_LOGIC_VECTOR (9 downto 0):="0010010000";
+signal dir: std_logic_vector (3 downto 0):="0001";
 CONSTANT tailleX :integer := 74;  
 CONSTANT tailleY :integer := 99;
 begin
@@ -67,27 +69,54 @@ begin
 		if (pixel<783-tailleX) and (btn_d='1')
 		then
 			pixel <= pixel + 1;
+			dir(1 downto 0)<="01";
 		end if;
 		
 		if (pixel > 144) and (btn_g='1')
 		then
 			pixel <= pixel - 1;
+			dir(1 downto 0)<="10";
 		end if;
 		
-		if (ligne<510-tailleY) and (btn_b='1')
+		if (dir(3 downto 2)="00") and (btn_h='1')
 		then
-			ligne <= ligne + 1;
+			dir(3 downto 2)<="10";
 		end if;
 		
-		if (ligne > 31) and (btn_h='1')
+		if (dir(3 downto 2)="10")
 		then
-			ligne <= ligne - 1;
+			if (ligne>=180) then ligne <= (ligne-7);
+				else if (ligne<180) and (ligne>=90) then ligne <= (ligne-5);
+					else if (ligne<90) and (ligne>=45) then ligne <= (ligne-3);
+						else ligne<=ligne-1;
+					end if;
+				end if;
+			end if;
+			if (ligne <= 31)
+			then
+				dir(3 downto 2)<="01";
+			end if;
+		end if;
+		
+		if (dir(3 downto 2)="01")
+		then
+			if (ligne>=180) then ligne <= (ligne+7);
+				else if (ligne<180) and (ligne>=90) then ligne <= (ligne+5);
+					else if (ligne<90) and (ligne>=45) then ligne <= (ligne+3);
+						else ligne<=ligne+1;
+					end if;
+				end if;
+			end if;
+			if (ligne >= 510-tailleY)
+			then
+				dir(3 downto 2)<="00";
+			end if;
 		end if;
 	end if;
 end process;
 
 origine_x <= pixel;
 orignie_y <= ligne;
-
+direction <= dir;
 end Behavioral;
 
