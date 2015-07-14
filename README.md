@@ -5,7 +5,7 @@
 
 This was a project realized during our second year of Bachelor at ECE Paris, Graduate School of Engineering.
 
-You can have a look at the result here: http://www.youtube.com/watch?v=TbqKeYX_fzQ .
+You can have a look at the result here: https://www.youtube.com/watch?v=OTdqTFmP8sY.
 
 This was entirely made in VHDL on a Basys Spartan-3E FPGA board using the software Xilinx.
 
